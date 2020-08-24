@@ -23,7 +23,7 @@
 
     !git clone https://github.com/ultralytics/yolov5 
     !pip install -qr yolov5/requirements.txt  
-Check if yolov5 is installed properply by
+Check if yolov5 is installed properly by
 
     cd yolov5
     !python detect.py --source '0' --output './results.avi'
@@ -52,6 +52,7 @@ runnung elasticsearch and reactivesearch UI
     bin/elasticsearch 
     cd  name_of_your_app 
     npm start
+Now,run producer.py to publish camera feeds then run kafka_spark.py to consume feeds from kafka, run yolov5 and send results to elasticsearch .
 
 ### Steps to show images or Videos 
     1. Go to your name_of_your_app/src directory replace App.js code from above App_main.js code similarly for App.css .
