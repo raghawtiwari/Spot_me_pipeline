@@ -80,8 +80,5 @@ runnung elasticsearch and reactivesearch UI
 Now,run producer.py to publish camera feeds then run kafka_spark.py to consume feeds from kafka, run yolov5 and send results to elasticsearch .(Make sure all spark dependencies are on the same directory where producer.py and kafka_spark.py exists. )
 
 ### Steps to show images or Videos 
-    1. Go to your name_of_your_app/src directory replace App.js code from above App_main.js code similarly for App.css .
-    2. Go to name_of_your_app/public directory, copy frame.py and push_to_es.py file here .
-    3. run frame.py here with terminal.
-    4. run push_to_es.py here with the terminal.
-    5. relod the page it must render all images and Videos or images .(in our case it will render only if data pushed to es cluster has the same mapping that i defined in python script.)
+    1. Go to your name_of_your_app/src directory replace App.js code from above App.js.
+    2. relod the page it must render all images and Videos or images .(in our case it will render only if data pushed to es cluster has the same mapping that i defined in python script.)
