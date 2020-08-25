@@ -76,15 +76,6 @@ if __name__ == "__main__":
 
     vid_detail_df3 = vid_detail_df2.select("video_detail.data","video_detail.date","video_detail.time","video_detail.camera_id")
 
-    # trans_detail_write_stream = transaction_detail_df1 \
-    #         .writeStream \
-    #         .outputMode("append") \
-    #         .option("format", "append")\
-    #         .format("console") \
-    #         .option("checkpointLocation", "/home/shashank/Desktop/Scaling/structuredstreamingkafkapyspark-master/checkpoint") \
-    #         .option("path","spark_warehouse") \
-    #         .start()
-
     def getrows(df, rownums=None):
         return df.rdd.zipWithIndex().filter(lambda x: x[1] in rownums).map(lambda x: x[0])
 
@@ -95,14 +86,8 @@ if __name__ == "__main__":
         global c
         global es_write_conf 
         
-       
-        
-        #es_con = {'val':eval(img[0][0]).decode('utf-8')}
         x="/images/results/img_%s.jpg/img_%s.jpg"%(str(c),str(c))
         es_con ={'data':eval(img[0][0]),'val':x,'date':img[0][1],'time':img[0][2],'camera_id':img[0][3]}
-        #import pdb
-        #pdb.set_trace()
-        #Sending img to ES cluster 
         
         rdd=spark.sparkContext.parallelize([es_con])
         new_rdd=rdd.map(lambda x: ('key',x))
@@ -115,10 +100,10 @@ if __name__ == "__main__":
         
         #Converting string back to .jpg format and storing it locally
         
-        file = open("/home/raghaw/image/public/images/img_%s.jpg"%str(c),'wb')
+        file = open("./images/img_%s.jpg"%str(c),'wb')
         file.write(base64.decodestring(eval(img[0][0])))
         file.close()
-        os.system("python3 /home/raghaw/yolov5/detect.py --source /home/raghaw/image/public/images/img_%s.jpg --output '/home/raghaw/image/public/images/results/img_%s.jpg'"%(str(c),str(c)))
+        os.system("python3 /home/raghaw/yolov5/detect.py --source ./image/public/images/img_%s.jpg --output '/home/raghaw/image/public/images/results/img_%s.jpg'"%(str(c),str(c)))
         c+=1
         
     vid_detail_write_stream = vid_detail_df3.writeStream.foreachBatch(foreach_batch_function).start()
