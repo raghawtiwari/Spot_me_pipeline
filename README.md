@@ -1,9 +1,32 @@
 
 # spot_me
 ### Requirements
-    kafka_2.11-2.4.1
-    spark-3.0.0
+
+ #### Setting Up PySpark
     sudo apt install openjdk-11-jdk 
+ Download latest spark hadoop from http://spark.apache.org/downloads.html and exract it 
+ 
+    $ tar -xzf spark-3.0.0-bin-hadoop2.7.tgz
+    $ pip3 install pyspark
+    $ sudo gedit .bashrc
+write folowing and save it 
+
+    export SPARK_HOME=<"path to extracted spark">
+    export PYTHONPATH=$SPARK_HOME/python:$SPARK_HOME/python/lib/py4j-0.10.8.1-src.zip:$PYTHONPATH
+    export PATH=$SPARK_HOME/bin:$SPARK_HOME/python:$PATH
+    export PYSPARK_PYTHON=python3
+    export PYSPARK_DRIVER_PYTHON=python3
+now open terminal and type
+
+    pyspark 
+it will run.
+
+
+ #### Setting Up Kafka
+    Go to official Appache kafka and install kafka in your pc.
+   
+ ### Setting Up Elasticsearch and reactivesearch
+ 
     wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-7.7.0-linux-x86_64.tar.gz (gettting elasticsearch )
     tar -xzf elasticsearch-7.7.0-linux-x86_64.tar.gz 
     sudo apt install npm 
@@ -12,6 +35,8 @@
     create-react-app   name_of_your_app (It will make a directory named name_of_your_app and install required dependencies to it.)
     
 ### spark_dependencies
+
+Download following dependencies
 
     spark-sql-kafka-0-10_2.12-3.0.0-preview.jar
     kafka-clients-2.5.0.jar
@@ -52,7 +77,7 @@ runnung elasticsearch and reactivesearch UI
     bin/elasticsearch 
     cd  name_of_your_app 
     npm start
-Now,run producer.py to publish camera feeds then run kafka_spark.py to consume feeds from kafka, run yolov5 and send results to elasticsearch .
+Now,run producer.py to publish camera feeds then run kafka_spark.py to consume feeds from kafka, run yolov5 and send results to elasticsearch .(Make sure all spark dependencies are on the same directory where producer.py and kafka_spark.py exists. )
 
 ### Steps to show images or Videos 
     1. Go to your name_of_your_app/src directory replace App.js code from above App_main.js code similarly for App.css .
